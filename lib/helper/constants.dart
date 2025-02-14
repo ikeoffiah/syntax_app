@@ -33,6 +33,9 @@ const String codingJSON = "assets/images/coding.json";
 /// loading
 const String loadingJSON = "assets/images/loading.json";
 
+/// pdf
+const String pdfJSON = "assets/images/doc_pdf.json";
+
 // onboarding text------------------
 
 /// page title
@@ -54,6 +57,7 @@ const List<String> pageBody = <String>[
 /// baseUrl
 const String baseUrl = "https://syntax-api.vercel.app/api/v1";
 
+///
 /// dashboard color
 List<Color> dashColor = <Color>[
   Colors.pink,
@@ -62,3 +66,6 @@ List<Color> dashColor = <Color>[
   Colors.orange,
   Colors.cyan,
 ];
+
+/// Enum
+enum LastUploads { successful, uploading, failed, nothing }

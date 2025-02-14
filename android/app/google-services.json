@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "347827090736",
+    "project_id": "syntax-535fa",
+    "storage_bucket": "syntax-535fa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347827090736:android:dcfd35e2ab1a694d8f44f5",
+        "android_client_info": {
+          "package_name": "co.studyprep.syntax"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzyWI8zOSjQPRWdLs3KDAV2YTMIRLKs-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

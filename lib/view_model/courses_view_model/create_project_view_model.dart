@@ -1,30 +1,29 @@
 import 'package:syntax_app/helper/response.dart';
-import 'package:syntax_app/models/user/user_results_model.dart';
 import 'package:syntax_app/requests/courses_requests.dart';
 
 /// ViewModel class responsible for submitting test.
 
-class SubmitTestViewModel {
+class CreateProjectViewModel {
   /// Constructor for the ViewModel, initializing the callback function
   /// and context.
-  SubmitTestViewModel({required this.onChangeValue, required this.getResults});
+  CreateProjectViewModel({required this.onChangeValue});
 
   /// Callback function triggered when the value changes.
   final dynamic Function(bool) onChangeValue;
 
-  /// Callback function for returning results
-  final dynamic Function(UserResultModel) getResults;
-
   /// Submit test results
-  Future<void> submitResult({
-    required List<Map<String, dynamic>> result,
+  Future<void> submitProject({
+    required String topic,
+    required String url,
   }) async {
     final Map<String, dynamic> userData = <String, dynamic>{
-      "submissions": result,
+      "topic": topic,
+      "file_u": url,
     };
 
     // API request to submit results.
-    final Map<String, dynamic> response = await submitTestRequest(userData);
+    final Map<String, dynamic> response =
+        await submitCustomProjectRequest(userData);
 
     // Handling the response from the API request with success or error callbacks.
     ResponseFunction(
@@ -32,8 +31,6 @@ class SubmitTestViewModel {
       response: response,
       successFunction: () {
         onChangeValue(true);
-        final UserResultModel results = UserResultModel.fromJson(response);
-        getResults(results);
       },
       errorStateFunction: () {
         onChangeValue(false);

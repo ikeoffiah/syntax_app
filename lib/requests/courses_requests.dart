@@ -8,6 +8,8 @@ String authToken = getAccessToken();
 /// Fetch all alert violations
 Future<Map<String, dynamic>> getQuestionsRequest() {
   String url = "$baseUrl/courses/test";
+  // test
+
   url = Uri.parse(url).toString();
   return baseGetCallAuth(url, authToken);
 }
@@ -16,6 +18,17 @@ Future<Map<String, dynamic>> getQuestionsRequest() {
 
 Future<Map<String, dynamic>> submitTestRequest(Map<String, dynamic> userData) {
   String url = "$baseUrl/courses/submit-test";
+
+  url = Uri.parse(url).toString();
+  return basePostCallAuth(url, userData, authToken);
+}
+
+/// submit project
+Future<Map<String, dynamic>> submitCustomProjectRequest(
+    Map<String, dynamic> userData) {
+  String url = "$baseUrl/courses/generate-question";
+  // custom-question
+  // "$baseUrl/courses/generate-question";
   url = Uri.parse(url).toString();
   return basePostCallAuth(url, userData, authToken);
 }

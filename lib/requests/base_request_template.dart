@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:syntax_app/requests/dio_exceptions.dart';
 
@@ -102,6 +104,7 @@ Future<Map<String, dynamic>> basePostCallNoAuth(
 
     return respondsData;
   } on DioException catch (e) {
+    log(e.response.toString());
     final DioExceptions errorMsg = DioExceptions.fromDioException(e);
 
     return errorMsg.errorData;

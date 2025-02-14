@@ -1,4 +1,4 @@
-package co.syntaxapp.syntax
+package co.studyprep.syntax
 
 import io.flutter.embedding.android.FlutterActivity
 

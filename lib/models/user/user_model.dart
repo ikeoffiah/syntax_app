@@ -24,12 +24,14 @@ class UserData {
   final Map<String, dynamic> categoryPoints;
   final int points;
   final int totalAttempts;
+  final String lastUpload;
 
   UserData({
     required this.stage,
     required this.categoryPoints,
     required this.points,
     required this.totalAttempts,
+    required this.lastUpload,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -38,6 +40,7 @@ class UserData {
       categoryPoints: Map<String, dynamic>.from(json['category_points']),
       points: json['points'],
       totalAttempts: json['total_attempts'],
+      lastUpload: json['last_upload'],
     );
   }
 
@@ -47,6 +50,7 @@ class UserData {
       'category_points': categoryPoints,
       'points': points,
       'total_attempts': totalAttempts,
+      'last_upload': lastUpload
     };
   }
 }

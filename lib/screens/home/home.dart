@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:syntax_app/helper/constants.dart';
 import 'package:syntax_app/helper/shared_preferences.dart';
+import 'package:syntax_app/helper/toasts.dart';
 import 'package:syntax_app/models/courses/courses_model.dart';
 import 'package:syntax_app/models/user/user_model.dart';
 import 'package:syntax_app/screens/custom_widget/custom_buttons/custom_button.dart';
@@ -65,19 +66,30 @@ class _HomepageScreenState extends State<HomepageScreen> {
         if (isSuccess) {}
       },
       getQuestion: (List<QuestionModel> quest) {
-        Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => QuizScreen2(
-              allQuestions: quest,
-              currentIndex: 0,
-              chosenOptions: const <Map<String, dynamic>>[],
+        if (quest.isEmpty) {
+          infoToast("No Questions available");
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => QuizScreen2(
+                allQuestions: quest,
+                currentIndex: 0,
+                chosenOptions: const <Map<String, dynamic>>[],
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
     ).getQuestions();
   }
+
+  final Map<String, Color> uploadColor = {
+    LastUploads.failed.name: Colors.red,
+    LastUploads.nothing.name: Colors.grey,
+    LastUploads.successful.name: Colors.green,
+    LastUploads.uploading.name: Colors.orange,
+  };
 
   @override
   Widget build(BuildContext context) => _isLoading
@@ -174,25 +186,53 @@ class _HomepageScreenState extends State<HomepageScreen> {
                                 ),
                               ),
                               const SizedBox(width: 10),
-                              const Text(
-                                '1 day',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
+                              // Container(
+                              //   padding: const EdgeInsets.symmetric(
+                              //     horizontal: 8,
+                              //     vertical: 4,
+                              //   ),
+                              //   decoration: BoxDecoration(
+                              //     color: uploadColor[
+                              //             userInfo?.lastUpload.toLowerCase()] ??
+                              //         uploadColor['nothing'],
+                              //     borderRadius: const BorderRadius.all(
+                              //         Radius.circular(12)),
+                              //   ),
+                              //   child: Text(
+                              //     '${userInfo?.lastUpload.toUpperCase()}',
+                              //     style: const TextStyle(
+                              //       color: Colors.black,
+                              //       fontWeight: FontWeight.bold,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                           const SizedBox(height: 10),
-                          const Text(
-                            'Take more tests to improve your skills exponentially and attain GURU status',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          const SizedBox(height: 16),
+                          // const Text(
+                          //   'Take more tests to improve your skills exponentially and attain GURU status',
+                          //   style: TextStyle(color: Colors.white, fontSize: 16),
+                          // ),
+                          const SizedBox(height: 10),
                           Lottie.asset(
                             studyJSON,
                             repeat: true,
                           ),
+                          // const SizedBox(height: 16),
+                          // CustomButton(
+                          //   color: primaryColor,
+                          //   buttonStyle: whiteColorInter14600,
+                          //   callback: () {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute<void>(
+                          //         builder: (BuildContext context) =>
+                          //             const AddCustomQuestions(),
+                          //       ),
+                          //     );
+                          //   },
+                          //   buttonText: "CREATE PROJECT",
+                          // )
                         ],
                       ),
                     ),

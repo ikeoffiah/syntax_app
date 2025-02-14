@@ -19,3 +19,13 @@ Future<Map<String, dynamic>> loginUser(Map<String, dynamic> userData) {
 
   return basePostCallNoAuth(url, userData);
 }
+
+/// sign up with google
+Future<Map<String, dynamic>> registerUserWithGoogle(
+  Map<String, dynamic> userData,
+) {
+  String url = "$baseUrl/auth/register-google";
+  url = Uri.parse(url).toString();
+
+  return basePostCallNoAuth(url, userData);
+}

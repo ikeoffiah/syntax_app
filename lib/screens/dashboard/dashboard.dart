@@ -4,9 +4,13 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syntax_app/helper/constants.dart';
+import 'package:syntax_app/main.dart';
 import 'package:syntax_app/models/user/user_model.dart';
+import 'package:syntax_app/screens/custom_widget/custom_buttons/custom_button.dart';
 import 'package:syntax_app/screens/dashboard/dashboard_card.dart';
 import 'package:syntax_app/screens/extra/loading.dart';
+import 'package:syntax_app/screens/onboarding/google_auth.dart';
+import 'package:syntax_app/screens/onboarding/onboarding.dart';
 import 'package:syntax_app/screens/utils/colors.dart';
 import 'package:syntax_app/screens/utils/margins.dart';
 import 'package:syntax_app/screens/utils/size.dart';
@@ -66,6 +70,7 @@ class _DashboardState extends State<Dashboard> {
           index++;
           total = total + (value as int);
         });
+        sortItemsByHighestValue(itemData);
 
         setState(() {
           pieData = itemData;
@@ -73,6 +78,13 @@ class _DashboardState extends State<Dashboard> {
         });
       },
     ).getUserProfile();
+  }
+
+  void sortItemsByHighestValue(List<PieChartSectionData> items) {
+    items.sort(
+      (PieChartSectionData a, PieChartSectionData b) =>
+          b.value.compareTo(a.value),
+    );
   }
 
   List<PieChartSectionData> pieData = <PieChartSectionData>[];
@@ -211,12 +223,8 @@ class _DashboardState extends State<Dashboard> {
                             child: DashboardCard(
                               icon: Icons.star,
                               label: "${userInfo!.points} Points",
-                              value: points > lastPoints
-                                  ? "↑ Increased"
-                                  : "↓ Decreased",
-                              iconColor: points > lastPoints
-                                  ? Colors.green
-                                  : Colors.red,
+                              value: 'Your points',
+                              iconColor: Colors.green,
                               showArrow: true,
                             ),
                           ),
@@ -237,6 +245,28 @@ class _DashboardState extends State<Dashboard> {
                     ),
 
                     height20,
+
+                    CustomButton(
+                      color: whiteColor,
+                      buttonStyle: primaryColorRoboto16600,
+                      callback: () {
+                        final AuthService authService = AuthService();
+                        unawaited(sharedPreferences.clear());
+                        unawaited(authService.signOut());
+                        unawaited(
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const OnboardingScreen(),
+                            ),
+                            (Route<dynamic> route) =>
+                                false, // Removes all previous routes
+                          ),
+                        );
+                      },
+                      buttonText: "Log out",
+                    ),
                   ],
                 ),
               ),

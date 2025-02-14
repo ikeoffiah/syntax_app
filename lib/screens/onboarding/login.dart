@@ -97,6 +97,10 @@ class _LoginInScreenState extends State<LoginInScreen> {
                                           const NavigationScreen(),
                                     ),
                                   );
+                                } else {
+                                  setState(() {
+                                    isLoading = false;
+                                  });
                                 }
                               },
                             ).login();

@@ -24,13 +24,13 @@ class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-        decoration: const BoxDecoration(color: whiteColor),
+        decoration: const BoxDecoration(color: primaryColor),
         child: AppBar(
-          backgroundColor: whiteColor,
+          backgroundColor: primaryColor,
           centerTitle: true,
           elevation: 0,
           flexibleSpace: ColoredBox(
-            color: whiteColor,
+            color: primaryColor,
             child: SafeArea(
               child: Container(
                 margin: pageMargin,
